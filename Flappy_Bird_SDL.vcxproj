@@ -18,6 +18,26 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Background.h" />
+    <ClInclude Include="Source\Bird.h" />
+    <ClInclude Include="Source\Board.h" />
+    <ClInclude Include="Source\Column.h" />
+    <ClInclude Include="Source\Game.h" />
+    <ClInclude Include="Source\Parameter.h" />
+    <ClInclude Include="Source\Renderer.h" />
+    <ClInclude Include="Source\Sound.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Background.cpp" />
+    <ClCompile Include="Source\Bird.cpp" />
+    <ClCompile Include="Source\Board.cpp" />
+    <ClCompile Include="Source\Column.cpp" />
+    <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\Plappy_Bird.cpp" />
+    <ClCompile Include="Source\Renderer.cpp" />
+    <ClCompile Include="Source\Sound.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -144,26 +164,6 @@
       <AdditionalDependencies>.\Lib\SDL2_mixer-2.6.1\lib\x64\SDL2_mixer.lib;./Lib/SDL/SDL2main.lib;./Lib/SDL/SDL2.lib;./Lib/SDL_IMAGE/lib/SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Background.h" />
-    <ClInclude Include="Bird.h" />
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="Column.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Parameter.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Sound.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Background.cpp" />
-    <ClCompile Include="Bird.cpp" />
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Column.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Plappy_Bird.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Sound.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
