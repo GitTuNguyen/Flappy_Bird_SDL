@@ -4,7 +4,7 @@ Bird::Bird()
 {
 	CreatBird();
 	m_speed = 0;
-	m_picture = 1;
+	m_birdMotion = 1;
 }
 
 void Bird::CreatBird()
@@ -13,24 +13,24 @@ void Bird::CreatBird()
 	m_coordinateBird.y = BIRD_Y;
 }
 
-Coordinate Bird::getCoordinateBird()
+Coordinate Bird::GetCoordinateBird()
 {
 	return m_coordinateBird;
 }
 
-int Bird::getPicture()
+int Bird::GetBirdMotion()
 {
-	return m_picture;
+	return m_birdMotion;
 }
 
-void Bird::setPicture()
+void Bird::SetBirdMotion()
 {
-	if (m_picture == NUMBER_OF_BIRD_PICTURE)
+	if (m_birdMotion == NUMBER_OF_BIRD_MOTION)
 	{
-		m_picture = 1;
+		m_birdMotion = 1;
 	}
 	else {
-		m_picture++;
+		m_birdMotion++;
 	}
 }
 

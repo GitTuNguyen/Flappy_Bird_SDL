@@ -7,31 +7,31 @@ Sound::Sound()
 		printf("%s", Mix_GetError());
 	}
 
-	m_swosh = Mix_LoadWAV("./Data/swosh.wav");
+	m_swosh = Mix_LoadWAV("Data/swosh.wav");
 	if (m_swosh == NULL)
 	{
 		printf("%s", Mix_GetError());
 	}
 
-	m_wing = Mix_LoadWAV("./Data/wing.wav");
+	m_wing = Mix_LoadWAV("Data/wing.wav");
 	if (m_wing == NULL)
 	{
 		printf("%s", Mix_GetError());
 	}
 
-	m_point = Mix_LoadWAV("./Data/point.wav");
+	m_point = Mix_LoadWAV("Data/point.wav");
 	if (m_point == NULL)
 	{
 		printf("%s", Mix_GetError());
 	}
 
-	m_hit = Mix_LoadWAV("./Data/hit.wav");
+	m_hit = Mix_LoadWAV("Data/hit.wav");
 	if (m_hit == NULL)
 	{
 		printf("%s", Mix_GetError());
 	}
 
-	m_die = Mix_LoadWAV("./Data/die.wav");
+	m_die = Mix_LoadWAV("Data/die.wav");
 	if (m_die == NULL)
 	{
 		printf("%s", Mix_GetError());

@@ -110,9 +110,9 @@ void Renderer::DrawGround(std::pair <Coordinate, Coordinate> i_coordinateGround)
 void Renderer::DrawStartScreen()
 {
 	SDL_Rect newRect;
-	newRect.w = WINDOW_WIDTH;
-	newRect.h = WINDOW_HEIGHT;
-	newRect.x = 0;
+	newRect.w = START_WINDOW_WIDTH;
+	newRect.h = START_WINDOW_HEIGHT;
+	newRect.x = (WINDOW_WIDTH - START_WINDOW_WIDTH) /2;
 	newRect.y = 0;
 	SDL_RenderCopy(m_sdlRenderer, m_loadedTextures["start_game"], NULL, &newRect);
 }

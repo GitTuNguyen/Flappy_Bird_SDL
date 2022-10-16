@@ -30,7 +30,7 @@
     <ClInclude Include="Source\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Parameter.h">
+    <ClInclude Include="Source\GameDefinition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Renderer.h">

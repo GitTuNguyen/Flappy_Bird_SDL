@@ -1,5 +1,4 @@
 #pragma once
-#include "Parameter.h"
 #include <cstdlib>
 #include <ctime>
 #include <vector>
@@ -12,15 +11,16 @@ class Board
 {
 public:
 	Board();
+	void StartGame();
 	void Reset();
-	GameResult getGameResult();
-	void setGameResult(GameResult i_gameResult);
-	Background* getBackground();
-	Column* getColumn();
-	Bird* getBird();
-	Sound* getSound();
-	int getScores();
-	void UpdateMove();
+	GameResult GetGameResult();
+	Background* GetBackground();
+	Column* GetColumn();
+	Bird* GetBird();
+	Sound* GetSound();
+	int GetScores();
+	void UpdateScores();
+	void ScreenMotion();
 	void UpdateGameResult();
 	~Board();
 private:	

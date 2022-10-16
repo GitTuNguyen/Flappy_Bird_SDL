@@ -1,19 +1,19 @@
 #pragma once
-#include "Parameter.h"
+#include "GameDefinition.h"
 #include "Sound.h"
 
 class Bird
 {
 public:
 	Bird();
-	Coordinate getCoordinateBird();
-	void setPicture();
-	int getPicture();
+	Coordinate GetCoordinateBird();
+	void SetBirdMotion();
+	int GetBirdMotion();
 	void BirdMove(bool i_isClick);
 	void BirdDie();
 private:
 	void CreatBird();
 	float m_speed;
-	int m_picture;
+	int m_birdMotion;
 	Coordinate m_coordinateBird;
 };

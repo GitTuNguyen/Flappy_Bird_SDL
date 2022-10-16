@@ -25,7 +25,7 @@
     <ClInclude Include="Source\Column.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\InputManager.h" />
-    <ClInclude Include="Source\Parameter.h" />
+    <ClInclude Include="Source\GameDefinition.h" />
     <ClInclude Include="Source\Renderer.h" />
     <ClInclude Include="Source\Sound.h" />
   </ItemGroup>

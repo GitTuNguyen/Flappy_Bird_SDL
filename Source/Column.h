@@ -1,5 +1,5 @@
 #pragma once
-#include "Parameter.h"
+#include "GameDefinition.h"
 #include <vector>
 
 class Column
