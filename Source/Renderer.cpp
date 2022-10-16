@@ -24,6 +24,9 @@ Renderer::Renderer()
 		printf("Could not create render %s", SDL_GetError());
 		return;
 	}
+
+	//Render in center of window
+	SDL_RenderSetLogicalSize(m_sdlRenderer, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void Renderer::PostFrame()
@@ -37,7 +40,7 @@ void Renderer::LoadTexture(std::string i_ImageName)
 	IMG_Init(IMG_INIT_PNG);
 	SDL_Surface* tempSurface = NULL;
 	SDL_Texture* texture = NULL;
-	std::string str = "./Data/" + i_ImageName + ".png";
+	std::string str = "Data/" + i_ImageName + ".png";
 	tempSurface = IMG_Load(str.c_str());
 	texture = SDL_CreateTextureFromSurface(m_sdlRenderer, tempSurface);
 	SDL_FreeSurface(tempSurface);
@@ -55,14 +58,14 @@ void Renderer::DrawBird(Coordinate i_coordinateBird, int i_numberPicture)
 	SDL_RenderCopy(m_sdlRenderer, m_loadedTextures[temp], NULL, &newRect);
 }
 
-void Renderer::DrawBirdDie(Coordinate i_coordinateBird)
+void Renderer::DrawBirdDie(Coordinate i_coordinateBird, int i_numberPicture)
 {
 	SDL_Rect newRect;
 	newRect.w = BIRD_WIDTH;
 	newRect.h = BIRD_HEIGHT;
 	newRect.x = i_coordinateBird.x;
 	newRect.y = i_coordinateBird.y;
-	std::string temp = "b_" + std::to_string(4);
+	std::string temp = "b_" + std::to_string(i_numberPicture);
 	SDL_RenderCopyEx(m_sdlRenderer, m_loadedTextures[temp], NULL, &newRect, 90, NULL, SDL_FLIP_NONE);
 }
 

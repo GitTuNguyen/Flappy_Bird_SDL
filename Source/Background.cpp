@@ -17,12 +17,12 @@ void Background::CreateBackground()
 	m_coordinateGround.second.y = WINDOW_HEIGHT - GROUND_HEIGHT;;
 }
 
-std::pair <Coordinate, Coordinate> Background::getCoordinateBackground()
+std::pair <Coordinate, Coordinate> Background::GetCoordinateBackground()
 {
 	return m_coordinateBackground;
 }
 
-std::pair <Coordinate, Coordinate> Background::getCoordinateGround()
+std::pair <Coordinate, Coordinate> Background::GetCoordinateGround()
 {
 	return m_coordinateGround;
 }

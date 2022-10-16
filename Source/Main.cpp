@@ -1,6 +1,6 @@
 #include "Game.h"
 
-int main()
+int SDL_main(int argc, char* argv[])
 {
 	Game* game = new Game();
 

@@ -21,30 +21,30 @@ void Game::LoadPicture()
 
 void Game::DrawScreen()
 {
-	m_renderer->DrawnBackground(m_board->GetBackground()->getCoordinateBackground());
+	m_renderer->DrawnBackground(m_board->GetBackground()->GetCoordinateBackground());
 	m_renderer->DrawColumn(m_board->GetColumn()->getCoordinateColumn());
-	m_renderer->DrawGround(m_board->GetBackground()->getCoordinateGround());
+	m_renderer->DrawGround(m_board->GetBackground()->GetCoordinateGround());
 	m_renderer->DrawScores(m_board->GetScores());
 }
 
 void Game::CreateNewGame()
 {
 	m_board->Reset();
-	DrawScreen();
 }
 
 void Game::Update()
-{
-	DrawScreen();
-	m_renderer->DrawStartScreen();
+{	
 	Uint32 screenMotionBefore, screenMotionAfter, birdMotionBefore, birdMotionAfter;
 	while (!m_isPlayerWantExit)
 	{
+		m_renderer->ClearFrame();
 		GameResult gameResult = m_board->GetGameResult();
 		m_inputManager->UpdateInput();
 		m_isPlayerWantExit = m_inputManager->IsGoingToQuit();
 		if (gameResult == GameResult::START)
 		{
+			DrawScreen();
+			m_renderer->DrawStartScreen();
 			if (m_inputManager->IsMouseUp())
 			{
 				m_board->StartGame();
@@ -55,7 +55,6 @@ void Game::Update()
 		}
 		else if (gameResult == GameResult::RUNNING)
 		{
-			m_renderer->ClearFrame();
 			if (m_inputManager->IsMouseUp())
 			{
 				m_board->GetSound()->SoundWing();
@@ -80,14 +79,13 @@ void Game::Update()
 			m_renderer->DrawBird(m_board->GetBird()->GetCoordinateBird(), m_board->GetBird()->GetBirdMotion());
 		}
 		else {
-			m_renderer->ClearFrame();
 			DrawScreen();
-			m_renderer->DrawBirdDie(m_board->GetBird()->GetCoordinateBird());
+			m_renderer->DrawBirdDie(m_board->GetBird()->GetCoordinateBird(), m_board->GetBird()->GetBirdMotion());
 			m_board->GetBird()->BirdDie();
 			m_renderer->DrawGameOverScreen();
 			if (m_inputManager->IsMouseUp())
 			{
-				CreateNewGame();
+				CreateNewGame();				
 			}			
 		}
 		m_renderer->PostFrame();

@@ -3,6 +3,7 @@
 Board::Board()
 {
 	Reset();
+	m_gameResult = GameResult::START;
 }
 
 void Board::StartGame()
@@ -12,8 +13,8 @@ void Board::StartGame()
 
 void Board::Reset()
 {
-	srand(time(0));
-	m_gameResult = GameResult::START;
+	srand(time(NULL));
+	m_gameResult = GameResult::RUNNING;
 	m_scores = 0;
 	m_background = new Background();
 	m_column = new Column();
@@ -97,7 +98,7 @@ void Board::ScreenMotion()
 	m_background->BackgroundMove();
 	m_column->ColumnMove();
 	
-	if (m_background->getCoordinateBackground().second.x == 0)
+	if (m_background->GetCoordinateBackground().second.x == 0)
 	{
 		m_background->CreateBackground();
 

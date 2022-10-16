@@ -28,7 +28,7 @@ void Column::InitColumn()
 {
 	for (int i = 0; i < NUMBER_COLUMN_IN_BOARD; i++)
 	{
-		m_coordinateColumn.push_back(CreateColumn(WINDOW_WIDTH - COLUMN_WIDTH + DISTANCE * i));
+		m_coordinateColumn.push_back(CreateColumn(WINDOW_WIDTH + DISTANCE * i));
 	}
 }
 
@@ -45,5 +45,5 @@ void Column::AddNewColumn()
 {
 	m_coordinateColumn.erase(m_coordinateColumn.begin());
 
-	m_coordinateColumn.push_back(CreateColumn(m_coordinateColumn[1].first.x + DISTANCE));
+	m_coordinateColumn.push_back(CreateColumn(m_coordinateColumn[NUMBER_COLUMN_IN_BOARD - 2].first.x + DISTANCE));
 }

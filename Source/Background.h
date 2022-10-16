@@ -6,8 +6,8 @@ class Background
 {
 public:
 	Background();
-	std::pair <Coordinate, Coordinate> getCoordinateBackground();
-	std::pair <Coordinate, Coordinate> getCoordinateGround();
+	std::pair <Coordinate, Coordinate> GetCoordinateBackground();
+	std::pair <Coordinate, Coordinate> GetCoordinateGround();
 	void BackgroundMove();
 	void CreateBackground();
 private:

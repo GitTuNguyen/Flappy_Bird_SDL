@@ -54,6 +54,6 @@ void Bird::BirdDie()
 {
 	if (m_coordinateBird.y + BIRD_WIDTH < WINDOW_HEIGHT)
 	{
-		m_coordinateBird.y += 10;
+		m_coordinateBird.y += 7;
 	}
 }
