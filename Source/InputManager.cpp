@@ -6,10 +6,12 @@ InputManager::InputManager()
 	m_mouseY = 0;
 	m_isGoingToQuit = false;
 	m_isMouseUp = false;
+	m_isSpaceKeyDown = false;
 }
 
 void InputManager::UpdateInput()
 {
+	m_isSpaceKeyDown = false;
 	m_isMouseUp = false;
 	SDL_Event mainEvent;
 	m_mouseX = 0;
@@ -34,6 +36,19 @@ void InputManager::UpdateInput()
 			m_mouseX = mainEvent.motion.x;
 			m_mouseY = mainEvent.motion.y;
 			break;
+		}
+		case SDL_KEYDOWN:
+		{
+			switch (mainEvent.key.keysym.sym)
+			{
+			case SDLK_SPACE:
+			{
+				m_isSpaceKeyDown = true;
+				break;
+			}
+			default:
+				break;
+			}
 		}
 		default:
 		{
@@ -61,4 +76,8 @@ bool InputManager::IsGoingToQuit()
 bool InputManager::IsMouseUp()
 {
 	return m_isMouseUp;
+}
+bool InputManager::IsSpaceKeyDown()
+{
+	return m_isSpaceKeyDown;
 }

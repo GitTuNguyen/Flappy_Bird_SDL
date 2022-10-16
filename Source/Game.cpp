@@ -45,7 +45,7 @@ void Game::Update()
 		{
 			DrawScreen();
 			m_renderer->DrawStartScreen();
-			if (m_inputManager->IsMouseUp())
+			if (m_inputManager->IsMouseUp() || m_inputManager->IsSpaceKeyDown())
 			{
 				m_board->StartGame();
 				screenMotionBefore = SDL_GetTicks();
@@ -55,7 +55,7 @@ void Game::Update()
 		}
 		else if (gameResult == GameResult::RUNNING)
 		{
-			if (m_inputManager->IsMouseUp())
+			if (m_inputManager->IsMouseUp() || m_inputManager->IsSpaceKeyDown())
 			{
 				m_board->GetSound()->SoundWing();
 			}			
@@ -74,7 +74,7 @@ void Game::Update()
 				m_board->GetBird()->SetBirdMotion();
 			}
 			m_board->UpdateGameResult();
-			m_board->GetBird()->BirdMove(m_inputManager->IsMouseUp());
+			m_board->GetBird()->BirdMove(m_inputManager->IsMouseUp() || m_inputManager->IsSpaceKeyDown());
 			DrawScreen();
 			m_renderer->DrawBird(m_board->GetBird()->GetCoordinateBird(), m_board->GetBird()->GetBirdMotion());
 		}
@@ -83,7 +83,7 @@ void Game::Update()
 			m_renderer->DrawBirdDie(m_board->GetBird()->GetCoordinateBird(), m_board->GetBird()->GetBirdMotion());
 			m_board->GetBird()->BirdDie();
 			m_renderer->DrawGameOverScreen();
-			if (m_inputManager->IsMouseUp())
+			if (m_inputManager->IsMouseUp() || m_inputManager->IsSpaceKeyDown())
 			{
 				CreateNewGame();				
 			}			
