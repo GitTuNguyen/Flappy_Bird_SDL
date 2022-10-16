@@ -73,3 +73,10 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
+
+task copyFiles(type: Copy) {
+    from '../../Data'
+    into 'src/main/assets/Data'
+}
+
+preBuild.dependsOn(copyFiles)
