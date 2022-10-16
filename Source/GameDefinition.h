@@ -13,11 +13,11 @@ enum GameResult {
 };
 
 //Window
-#define WINDOW_WIDTH 400
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 360
+#define WINDOW_HEIGHT 720
 
 //Start Window
-#define START_WINDOW_WIDTH (WINDOW_WIDTH * 2 / 3)
+#define START_WINDOW_WIDTH (WINDOW_WIDTH * 4 / 5)
 #define START_WINDOW_HEIGHT (WINDOW_HEIGHT * 2 / 3)
 
 //Bird
@@ -27,17 +27,17 @@ enum GameResult {
 #define BIRD_Y ((WINDOW_HEIGHT - BIRD_HEIGHT) / 2)
 #define G 0.3
 #define SPEED_FLY -6
-#define NUMBER_OF_BIRD_MOTION 4
+#define NUMBER_OF_BIRD_MOTION 3
 
 //Column
 
-#define COLUMN_WIDTH 60
-#define COLUMN_HEIGHT 500
+#define COLUMN_WIDTH 80
+#define COLUMN_HEIGHT 600
 #define BLANK 160
-#define DISTANCE 200
+#define DISTANCE 300
 #define COLUMN_SPEED 2
 #define NUMBER_COLUMN_IN_BOARD 3
-#define MIN_COLUMN_HEIGHT_DISPLAY 50
+#define MIN_COLUMN_HEIGHT_DISPLAY 100
 
 //Ground
 #define GROUND_HEIGHT 30
