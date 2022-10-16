@@ -150,6 +150,7 @@ void Renderer::DrawScores(int i_scores)
 
 void Renderer::ClearFrame()
 {
+	SDL_SetRenderDrawColor(m_sdlRenderer, 0, 0, 0, 255);
 	SDL_RenderClear(m_sdlRenderer);
 }
 

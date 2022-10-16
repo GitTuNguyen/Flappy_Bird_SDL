@@ -4,6 +4,7 @@ Game::Game()
 {
 	m_board = new Board();
 	m_renderer = new Renderer();
+	m_inputManager = new InputManager();
 	m_isPlayerWantExit = false;
 	m_isClick = false;
 	LoadPicture();
@@ -23,7 +24,6 @@ void Game::DrawScreen()
 	m_renderer->DrawnBackground(m_board->getBackground()->getCoordinateBackground());
 	m_renderer->DrawColumn(m_board->getColumn()->getCoordinateColumn());
 	m_renderer->DrawGround(m_board->getBackground()->getCoordinateGround());
-	m_renderer->DrawBird(m_board->getBird()->getCoordinateBird(), m_board->getBird()->getPicture());
 	m_renderer->DrawScores(m_board->getScores());
 }
 
@@ -40,57 +40,25 @@ void Game::Update()
 	while (!m_isPlayerWantExit)
 	{
 		GameResult gameResult = m_board->getGameResult();
-
+		m_inputManager->UpdateInput();
+		m_isPlayerWantExit = m_inputManager->IsGoingToQuit();
 		if (gameResult == GameResult::START)
 		{
-			while (SDL_PollEvent(&mainEvent))
+			if (m_inputManager->IsMouseUp())
 			{
-				switch (mainEvent.type)
-				{
-				case SDL_QUIT:
-				{
-					m_isPlayerWantExit = true;
-					break;
-				}
-				case SDL_MOUSEBUTTONDOWN:
-				{
-					m_board->setGameResult(GameResult::RUNNING);
-					before_1 = SDL_GetTicks();
-					before_2 = SDL_GetTicks();
-					m_board->getSound()->SoundSwosh();
-					break;
-				}
-				default:
-				{
-					break;
-				}
-				}
+				m_board->setGameResult(GameResult::RUNNING);
+				before_1 = SDL_GetTicks();
+				before_2 = SDL_GetTicks();
+				m_board->getSound()->SoundSwosh();
 			}
 		}
 		else if (gameResult == GameResult::RUNNING)
 		{
 			m_renderer->ClearFrame();
-			while (SDL_PollEvent(&mainEvent))
+			if (m_inputManager->IsMouseUp())
 			{
-				switch (mainEvent.type)
-				{
-				case SDL_QUIT:
-				{
-					m_isPlayerWantExit = true;
-					break;
-				}
-				case SDL_MOUSEBUTTONDOWN:
-				{
-					m_isClick = true;
-					m_board->getSound()->SoundWing();
-					break;
-				}
-				default:
-				{
-					break;
-				}
-				}
-			}
+				m_board->getSound()->SoundWing();
+			}			
 			after_1 = SDL_GetTicks();
 			after_2 = SDL_GetTicks();
 			if (after_1 - before_1 >= 10)
@@ -105,40 +73,20 @@ void Game::Update()
 				m_board->getBird()->setPicture();
 			}
 			m_board->UpdateGameResult();
-			m_board->getBird()->BirdMove(m_isClick);
-			m_isClick = false;
+			m_board->getBird()->BirdMove(m_inputManager->IsMouseUp());
 			DrawScreen();
+			m_renderer->DrawBird(m_board->getBird()->getCoordinateBird(), m_board->getBird()->getPicture());
 		}
 		else {
 			m_renderer->ClearFrame();
-			m_renderer->DrawnBackground(m_board->getBackground()->getCoordinateBackground());
-			m_renderer->DrawColumn(m_board->getColumn()->getCoordinateColumn());
-			m_renderer->DrawGround(m_board->getBackground()->getCoordinateGround());
+			DrawScreen();
 			m_renderer->DrawBirdDie(m_board->getBird()->getCoordinateBird());
-			m_renderer->DrawScores(m_board->getScores());
 			m_board->getBird()->BirdDie();
 			m_renderer->DrawGameOverScreen();
-			while (SDL_PollEvent(&mainEvent))
+			if (m_inputManager->IsMouseUp())
 			{
-				switch (mainEvent.type)
-				{
-				case SDL_QUIT:
-				{
-					m_isPlayerWantExit = true;
-					break;
-				}
-				case SDL_MOUSEBUTTONDOWN:
-				{
-
-					CreateNewGame();
-					break;
-				}
-				default:
-				{
-					break;
-				}
-				}
-			}
+				CreateNewGame();
+			}			
 		}
 		m_renderer->PostFrame();
 	}
@@ -149,4 +97,5 @@ Game::~Game()
 {
 	delete m_board;
 	delete m_renderer;
+	delete m_inputManager;
 }

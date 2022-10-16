@@ -1,6 +1,7 @@
 #pragma once
 #include "Board.h"
 #include "Renderer.h"
+#include "InputManager.h"
 #include <iostream>
 
 class Game 
@@ -12,6 +13,7 @@ public:
 private:
 	Board* m_board;
 	Renderer* m_renderer;
+	InputManager* m_inputManager;
 	bool m_isPlayerWantExit;
 	bool m_isClick;
 	SDL_Event mainEvent;
