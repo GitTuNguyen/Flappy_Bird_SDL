@@ -2,7 +2,7 @@
 
 ### Introduction
 
-A practical simple C++ project to play Plappy Bird using SDL.
+A C++ project to play Plappy Bird using SDL.
 
 ### How to build:
 
