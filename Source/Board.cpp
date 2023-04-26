@@ -1,5 +1,8 @@
 #include "Board.h"
 
+Board* Board::instance = nullptr;
+std::mutex Board::m_mutex;
+
 Board::Board()
 {
 	Reset();
@@ -18,8 +21,9 @@ void Board::Reset()
 	m_scores = 0;
 	m_background = new Background();
 	m_column = new Column();
-	m_bird = new Bird();
-	m_sound = new Sound();
+	m_bird = Bird::GetInstance();
+	m_bird->Reset();
+	m_sound = SFXManager::GetInstance();
 }
 
 Background* Board::GetBackground()
@@ -47,7 +51,7 @@ int Board::GetScores()
 	return m_scores;
 }
 
-Sound* Board::GetSound()
+SFXManager* Board::GetSound()
 {
 	return m_sound;
 }
@@ -56,7 +60,7 @@ void Board::UpdateGameResult()
 {
 	for (int i = 0; i < NUMBER_COLUMN_IN_BOARD; i++)
 	{
-		if ((m_bird->GetCoordinateBird().x >= m_column->getCoordinateColumn()[i].first.x - BIRD_WIDTH && m_bird->GetCoordinateBird().x <= m_column->getCoordinateColumn()[i].first.x + COLUMN_WIDTH) && ((m_bird->GetCoordinateBird().y >= 0 && m_bird->GetCoordinateBird().y <= m_column->getCoordinateColumn()[i].first.y + COLUMN_HEIGHT) || (m_bird->GetCoordinateBird().y + BIRD_HEIGHT >= m_column->getCoordinateColumn()[i].second.y)))
+		if ((m_bird->GetBirdCoordinate().x >= m_column->getCoordinateColumn()[i].first.x - BIRD_WIDTH && m_bird->GetBirdCoordinate().x <= m_column->getCoordinateColumn()[i].first.x + COLUMN_WIDTH) && ((m_bird->GetBirdCoordinate().y >= 0 && m_bird->GetBirdCoordinate().y <= m_column->getCoordinateColumn()[i].first.y + COLUMN_HEIGHT) || (m_bird->GetBirdCoordinate().y + BIRD_HEIGHT >= m_column->getCoordinateColumn()[i].second.y)))
 		{
 			m_gameResult = GameResult::GAMEOVER;
 			m_sound->SoundHit();
@@ -64,7 +68,7 @@ void Board::UpdateGameResult()
 			break;
 		}
 	}
-	if (m_bird->GetCoordinateBird().y + BIRD_HEIGHT >= WINDOW_HEIGHT - GROUND_HEIGHT)
+	if (m_bird->GetBirdCoordinate().y + BIRD_HEIGHT >= WINDOW_HEIGHT - GROUND_HEIGHT)
 	{
 		m_gameResult = GameResult::GAMEOVER;
 		m_sound->SoundHit();
@@ -76,7 +80,7 @@ bool Board::CheckScore()
 {
 	for (int i = 0; i < NUMBER_COLUMN_IN_BOARD; i++)
 	{
-		if (m_bird->GetCoordinateBird().x + BIRD_WIDTH == m_column->getCoordinateColumn()[i].first.x + (COLUMN_WIDTH / 2) )
+		if (m_bird->GetBirdCoordinate().x + BIRD_WIDTH == m_column->getCoordinateColumn()[i].first.x + (COLUMN_WIDTH / 2) )
 		{
 			return true;
 		}
@@ -109,10 +113,19 @@ void Board::ScreenMotion()
 	}
 }
 
+Board* Board::GetInstance()
+{
+	m_mutex.lock();
+	if (instance == nullptr) {
+		instance = new Board();
+	}
+	m_mutex.unlock();
+	return instance;
+}
+
 Board::~Board()
 {
 	delete m_background;
 	delete m_column;
-	delete m_bird;
-	delete m_sound;
+	delete instance;
 }

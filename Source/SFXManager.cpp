@@ -1,5 +1,8 @@
 #include "SFXManager.h"
 
+SFXManager* SFXManager::instance = nullptr;
+std::mutex SFXManager::m_mutex;
+
 SFXManager::SFXManager()
 {
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
@@ -66,4 +69,18 @@ void SFXManager::SoundDie()
 void SFXManager::StopPlaySound()
 {
 	Mix_HaltChannel(-1);
+}
+
+SFXManager* SFXManager::GetInstance()
+{
+	m_mutex.lock();
+	if (instance == nullptr) {
+		instance = new SFXManager();
+	}
+	m_mutex.unlock();
+	return instance;
+}
+SFXManager::~SFXManager()
+{
+	delete instance;
 }

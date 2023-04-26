@@ -1,5 +1,8 @@
 #include "Renderer.h"
 
+Renderer* Renderer::instance = nullptr;
+std::mutex Renderer::m_mutex;
+
 Renderer::Renderer()
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -165,5 +168,15 @@ void Renderer::CleanUp()
 	SDL_DestroyRenderer(m_sdlRenderer);
 
 	SDL_Quit();
+}
+
+Renderer* Renderer::GetInstance()
+{
+	m_mutex.lock();
+	if (instance == nullptr) {
+		instance = new Renderer();
+	}
+	m_mutex.unlock();
+	return instance;
 }
 

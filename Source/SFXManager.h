@@ -1,17 +1,23 @@
 #pragma once
 #include "SDL_mixer.h"
 #include <string>
+#include <mutex>
 class SFXManager
 {
 public:
-	SFXManager();
+	
 	void SoundSwosh();
 	void SoundWing();
 	void SoundPoint();
 	void SoundHit();
 	void SoundDie();
 	void StopPlaySound();
+	static SFXManager* GetInstance();
+	~SFXManager();
 private:
+	SFXManager();
+	static SFXManager* instance;
+	static std::mutex m_mutex;
 	Mix_Chunk* m_swosh = NULL;
 	Mix_Chunk* m_wing = NULL;
 	Mix_Chunk* m_point = NULL;

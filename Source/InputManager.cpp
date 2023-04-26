@@ -1,5 +1,8 @@
 #include "InputManager.h"
 
+InputManager* InputManager::instance = nullptr;
+std::mutex InputManager::m_mutex;
+
 InputManager::InputManager()
 {
 	m_mouseX = 0;
@@ -7,6 +10,7 @@ InputManager::InputManager()
 	m_isGoingToQuit = false;
 	m_isMouseUp = false;
 	m_isSpaceKeyDown = false;
+	instance = nullptr;
 }
 
 void InputManager::UpdateInput()
@@ -80,4 +84,14 @@ bool InputManager::IsMouseUp()
 bool InputManager::IsSpaceKeyDown()
 {
 	return m_isSpaceKeyDown;
+}
+
+InputManager* InputManager::GetInstance()
+{
+	m_mutex.lock();
+	if (instance == nullptr) {
+		instance = new InputManager();
+	}
+	m_mutex.unlock();
+	return instance;
 }

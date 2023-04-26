@@ -8,7 +8,7 @@
 
 class Renderer {
 public:
-	Renderer();
+	
 	void LoadTexture(std::string i_ImageName);
 	void DrawStartScreen();
 	void DrawBird(Coordinate i_coordinateBird, int i_birdMotion);
@@ -20,9 +20,12 @@ public:
 	void DrawGameOverScreen();
 	void ClearFrame();
 	void PostFrame();
-	void PreRendering();
 	void CleanUp();
+	static Renderer* GetInstance();
 private:
+	Renderer();
+	static std::mutex m_mutex;
+	static Renderer* instance;
 	SDL_Window* m_window = NULL;
 	SDL_Renderer* m_sdlRenderer = NULL;
 	std::map<std::string, SDL_Texture*> m_loadedTextures;

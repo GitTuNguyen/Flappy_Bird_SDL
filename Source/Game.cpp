@@ -2,9 +2,9 @@
 
 Game::Game()
 {
-	m_board = new Board();
-	m_renderer = new Renderer();
-	m_inputManager = new InputManager();
+	m_board = Board::GetInstance();
+	m_renderer = Renderer::GetInstance();
+	m_inputManager = InputManager::GetInstance();
 	m_isPlayerWantExit = false;
 	m_isClick = false;
 	LoadPicture();
@@ -71,17 +71,18 @@ void Game::Update()
 			if (birdMotionAfter - birdMotionBefore >= 100)
 			{
 				birdMotionBefore = birdMotionAfter;
-				m_board->GetBird()->SetBirdMotion();
+				m_board->GetBird()->BirdAnimation();
 			}
 			m_board->UpdateGameResult();
 			m_board->GetBird()->BirdMove(m_inputManager->IsMouseUp() || m_inputManager->IsSpaceKeyDown());
 			DrawScreen();
-			m_renderer->DrawBird(m_board->GetBird()->GetCoordinateBird(), m_board->GetBird()->GetBirdMotion());
+			m_renderer->DrawBird(m_board->GetBird()->GetBirdCoordinate(), m_board->GetBird()->GetBirdMotion());
 		}
 		else {
 			DrawScreen();
-			m_renderer->DrawBirdDie(m_board->GetBird()->GetCoordinateBird(), m_board->GetBird()->GetBirdMotion());
+			m_renderer->DrawBirdDie(m_board->GetBird()->GetBirdCoordinate(), m_board->GetBird()->GetBirdMotion());
 			m_board->GetBird()->BirdDie();
+			m_board->GetBird()->BirdMove(m_inputManager->IsMouseUp() || m_inputManager->IsSpaceKeyDown());
 			m_renderer->DrawGameOverScreen();
 			if (m_inputManager->IsMouseUp() || m_inputManager->IsSpaceKeyDown())
 			{
@@ -91,11 +92,4 @@ void Game::Update()
 		m_renderer->PostFrame();
 	}
 	m_renderer->CleanUp();
-}
-
-Game::~Game()
-{
-	delete m_board;
-	delete m_renderer;
-	delete m_inputManager;
 }

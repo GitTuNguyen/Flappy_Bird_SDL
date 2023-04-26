@@ -9,7 +9,6 @@ class Game
 public:
 	Game();
 	void Update();
-	~Game();
 private:
 	Board* m_board;
 	Renderer* m_renderer;
@@ -20,5 +19,4 @@ private:
 	void LoadPicture();
 	void DrawScreen();
 	void CreateNewGame();
-	//void Rematch();
 };

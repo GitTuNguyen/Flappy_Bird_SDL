@@ -21,24 +21,31 @@
   <ItemGroup>
     <ClInclude Include="Source\Background.h" />
     <ClInclude Include="Source\Bird.h" />
+    <ClInclude Include="Source\BirdState.h" />
     <ClInclude Include="Source\Board.h" />
     <ClInclude Include="Source\Column.h" />
+    <ClInclude Include="Source\DieBirdState.h" />
+    <ClInclude Include="Source\FallingBirdState.h" />
+    <ClInclude Include="Source\FlyingBirdState.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\InputManager.h" />
     <ClInclude Include="Source\GameDefinition.h" />
     <ClInclude Include="Source\Renderer.h" />
-    <ClInclude Include="Source\Sound.h" />
+    <ClInclude Include="Source\SFXManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Background.cpp" />
     <ClCompile Include="Source\Bird.cpp" />
     <ClCompile Include="Source\Board.cpp" />
     <ClCompile Include="Source\Column.cpp" />
+    <ClCompile Include="Source\DieBirdState.cpp" />
+    <ClCompile Include="Source\FallingBirdState.cpp" />
+    <ClCompile Include="Source\FlyingBirdState.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\InputManager.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Renderer.cpp" />
-    <ClCompile Include="Source\Sound.cpp" />
+    <ClCompile Include="Source\SFXManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
