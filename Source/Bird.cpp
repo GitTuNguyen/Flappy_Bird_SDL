@@ -1,59 +1,77 @@
+
+
 #include "Bird.h"
 
 Bird::Bird()
 {
-	CreatBird();
+	InitializeCoordinate();
+	m_flyingState = new FlyingBirdState(this);
+	m_fallingState = new FallingBirdState(this);
+	m_dieState = new DieBirdState(this);
+	m_birdCurrentState = m_fallingState;
 	m_speed = 0;
-	m_birdMotion = 1;
+	m_indexImageOfBird = 1;
 }
 
-void Bird::CreatBird()
+void Bird::InitializeCoordinate()
 {
 	m_coordinateBird.x = BIRD_X;
 	m_coordinateBird.y = BIRD_Y;
 }
 
-Coordinate Bird::GetCoordinateBird()
+Coordinate Bird::GetBirdCoordinate()
 {
 	return m_coordinateBird;
+}
+void Bird::SetBirdCoordinate(int i_y)
+{
+	m_coordinateBird.y = i_y;
 }
 
 int Bird::GetBirdMotion()
 {
-	return m_birdMotion;
+	return m_indexImageOfBird;
 }
 
-void Bird::SetBirdMotion()
+void Bird::BirdAnimation()
 {
-	if (m_birdMotion == NUMBER_OF_BIRD_MOTION)
+	if (m_indexImageOfBird == NUMBER_OF_BIRD_MOTION)
 	{
-		m_birdMotion = 1;
+		m_indexImageOfBird = 1;
 	}
 	else {
-		m_birdMotion++;
+		m_indexImageOfBird++;
 	}
 }
 
-void Bird::BirdMove(bool i_isClick)
+void Bird::SetState(BirdState* i_state)
 {
-	if (i_isClick)
+	m_birdCurrentState = i_state;
+}
+
+void Bird::BirdMove(bool i_isFly)
+{
+	if (i_isFly && m_birdCurrentState != m_dieState)
 	{
-		m_speed = SPEED_FLY;
+		SetState(m_flyingState);
+		m_birdCurrentState->Move();
+		
+		SetState(m_fallingState);
 	}
-	if (m_coordinateBird.y + m_speed + 0.5 * G <= 0)
+	else {
+		m_birdCurrentState->Move();
+	}
+	if (m_coordinateBird.y + m_speed <= 0)
 	{
 		m_coordinateBird.y = 0;
 	}
 	else {
-		m_coordinateBird.y += m_speed + 0.5 * G;		
+		m_coordinateBird.y += m_speed;
 	}
-	m_speed += G;
+	
 }
 
 void Bird::BirdDie()
 {
-	if (m_coordinateBird.y + BIRD_WIDTH < WINDOW_HEIGHT)
-	{
-		m_coordinateBird.y += 7;
-	}
+	SetState(m_dieState);
 }
