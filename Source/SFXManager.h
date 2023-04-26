@@ -1,7 +1,7 @@
 #pragma once
 #include "SDL_mixer.h"
 #include <string>
-class SFXManagerS
+class SFXManager
 {
 public:
 	SFXManager();
