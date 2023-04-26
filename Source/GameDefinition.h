@@ -27,6 +27,8 @@ enum GameResult {
 #define BIRD_Y ((WINDOW_HEIGHT - BIRD_HEIGHT) / 2)
 #define G 0.3
 #define SPEED_FLY -6
+#define SPEED_FALLING G
+#define SPEED_FALLING_WHEN_DIE 7
 #define NUMBER_OF_BIRD_MOTION 3
 
 //Column
