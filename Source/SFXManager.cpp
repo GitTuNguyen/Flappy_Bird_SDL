@@ -1,6 +1,6 @@
-#include "Sound.h"
+#include "SFXManager.h"
 
-Sound::Sound()
+SFXManager::SFXManager()
 {
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 	{
@@ -38,32 +38,32 @@ Sound::Sound()
 	}
 }
 
-void Sound::SoundSwosh()
+void SFXManager::SoundSwosh()
 {
 	Mix_PlayChannel(-1, m_swosh, 0);
 }
 
-void Sound::SoundWing()
+void SFXManager::SoundWing()
 {
 	Mix_PlayChannel(-1, m_wing, 0);
 }
 
-void Sound::SoundPoint()
+void SFXManager::SoundPoint()
 {
 	Mix_PlayChannel(-1, m_point, 0);
 }
 
-void Sound::SoundHit()
+void SFXManager::SoundHit()
 {
 	Mix_PlayChannel(-1, m_hit, 0);
 }
 
-void Sound::SoundDie()
+void SFXManager::SoundDie()
 {
 	Mix_PlayChannel(-1, m_die, 0);
 }
 
-void Sound::StopPlaySound()
+void SFXManager::StopPlaySound()
 {
 	Mix_HaltChannel(-1);
 }

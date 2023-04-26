@@ -1,10 +1,10 @@
 #pragma once
 #include "SDL_mixer.h"
 #include <string>
-class Sound
+class SFXManagerS
 {
 public:
-	Sound();
+	SFXManager();
 	void SoundSwosh();
 	void SoundWing();
 	void SoundPoint();
