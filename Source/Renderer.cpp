@@ -30,6 +30,7 @@ Renderer::Renderer()
 
 	//Render in center of window
 	SDL_RenderSetLogicalSize(m_sdlRenderer, WINDOW_WIDTH, WINDOW_HEIGHT);
+	m_indexImageOfBird = 1;
 }
 
 void Renderer::PostFrame()
@@ -50,25 +51,36 @@ void Renderer::LoadTexture(std::string i_ImageName)
 	m_loadedTextures.insert(std::pair<std::string, SDL_Texture*>(i_ImageName, texture));
 }
 
-void Renderer::DrawBird(Coordinate i_coordinateBird, int i_numberPicture)
+void Renderer::BirdAnimation()
+{
+	if (m_indexImageOfBird == NUMBER_OF_BIRD_MOTION)
+	{
+		m_indexImageOfBird = 1;
+	}
+	else {
+		m_indexImageOfBird++;
+	}
+}
+
+void Renderer::DrawBird(Coordinate i_coordinateBird)
 {
 	SDL_Rect newRect;
 	newRect.w = BIRD_WIDTH;
 	newRect.h = BIRD_HEIGHT;
 	newRect.x = i_coordinateBird.x;
 	newRect.y = i_coordinateBird.y;
-	std::string temp = "b_" + std::to_string(i_numberPicture);
+	std::string temp = "b_" + std::to_string(m_indexImageOfBird);
 	SDL_RenderCopy(m_sdlRenderer, m_loadedTextures[temp], NULL, &newRect);
 }
 
-void Renderer::DrawBirdDie(Coordinate i_coordinateBird, int i_numberPicture)
+void Renderer::DrawBirdDie(Coordinate i_coordinateBird)
 {
 	SDL_Rect newRect;
 	newRect.w = BIRD_WIDTH;
 	newRect.h = BIRD_HEIGHT;
 	newRect.x = i_coordinateBird.x;
 	newRect.y = i_coordinateBird.y;
-	std::string temp = "b_" + std::to_string(i_numberPicture);
+	std::string temp = "b_" + std::to_string(m_indexImageOfBird);
 	SDL_RenderCopyEx(m_sdlRenderer, m_loadedTextures[temp], NULL, &newRect, 90, NULL, SDL_FLIP_NONE);
 }
 

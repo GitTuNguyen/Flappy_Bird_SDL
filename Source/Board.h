@@ -12,7 +12,7 @@
 class Board 
 {
 public:
-	
+	Board();	
 	void StartGame();
 	void Reset();
 	GameResult GetGameResult();
@@ -24,13 +24,10 @@ public:
 	void UpdateScores();
 	void ScreenMotion();
 	void UpdateGameResult();
-	static Board* GetInstance();
+	bool IsCanStartNewGame();
 	~Board();
 private:
-	Board();
 	bool CheckScore();
-	static std::mutex m_mutex;
-	static Board* instance;
 	Background* m_background;
 	Column* m_column;
 	Bird* m_bird;

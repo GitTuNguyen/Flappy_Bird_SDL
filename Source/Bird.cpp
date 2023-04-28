@@ -1,9 +1,6 @@
 #include "Bird.h"
 
 
-Bird* Bird::instance = nullptr;
-std::mutex Bird::m_mutex;
-
 Bird::Bird()
 {
 	m_flyingState = new FlyingBirdState(this);
@@ -17,7 +14,7 @@ void Bird::Reset()
 	InitializeCoordinate();
 	m_birdCurrentState = m_fallingState;
 	m_speed = 0;
-	m_indexImageOfBird = 1;
+	m_isDie = false;
 }
 
 void Bird::InitializeCoordinate()
@@ -30,25 +27,10 @@ Coordinate Bird::GetBirdCoordinate()
 {
 	return m_coordinateBird;
 }
+
 void Bird::SetBirdCoordinate(int i_y)
 {
 	m_coordinateBird.y = i_y;
-}
-
-int Bird::GetBirdMotion()
-{
-	return m_indexImageOfBird;
-}
-
-void Bird::BirdAnimation()
-{
-	if (m_indexImageOfBird == NUMBER_OF_BIRD_MOTION)
-	{
-		m_indexImageOfBird = 1;
-	}
-	else {
-		m_indexImageOfBird++;
-	}
 }
 
 void Bird::SetState(BirdState* i_state)
@@ -80,19 +62,9 @@ void Bird::BirdMove(bool i_isFly)
 
 void Bird::BirdDie()
 {
-	SetState(m_dieState);
-}
-
-Bird* Bird::GetInstance()
-{
-	m_mutex.lock();
-	if (instance == nullptr) {
-		instance = new Bird();
+	if (m_birdCurrentState != m_dieState)
+	{
+		SetState(m_dieState);
+		m_isDie = true;
 	}
-	m_mutex.unlock();
-	return instance;
-}
-Bird::~Bird()
-{
-	delete instance;
 }

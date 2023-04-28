@@ -1,8 +1,5 @@
 #include "Board.h"
 
-Board* Board::instance = nullptr;
-std::mutex Board::m_mutex;
-
 Board::Board()
 {
 	Reset();
@@ -20,9 +17,8 @@ void Board::Reset()
 	m_gameResult = GameResult::RUNNING;
 	m_scores = 0;
 	m_background = new Background();
-	m_column = new Column();
-	m_bird = Bird::GetInstance();
-	m_bird->Reset();
+	m_column = new Column();	
+	m_bird = new Bird();
 	m_sound = SFXManager::GetInstance();
 }
 
@@ -112,20 +108,14 @@ void Board::ScreenMotion()
 		m_column->AddNewColumn();
 	}
 }
-
-Board* Board::GetInstance()
+bool Board::IsCanStartNewGame()
 {
-	m_mutex.lock();
-	if (instance == nullptr) {
-		instance = new Board();
-	}
-	m_mutex.unlock();
-	return instance;
+	return m_bird->m_isDie && (m_bird->GetBirdCoordinate().y + BIRD_WIDTH >= WINDOW_HEIGHT);
 }
 
 Board::~Board()
 {
 	delete m_background;
 	delete m_column;
-	delete instance;
+	delete m_bird;
 }
